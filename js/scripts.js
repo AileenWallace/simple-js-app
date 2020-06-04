@@ -1,10 +1,5 @@
-alert("Hello");
-var favoriteFood = "avocado";
-document.write(favoriteFood);
-
-var name = "John";
-document.write("My name is " + name + " and I am ready to start!");
-
-var name = "John";
-var age = 42;
-document.write("My name is " + name + " and I'm " + age + " years old!");
+pokemonList = [
+  { name: "Bulbasaur", height: 0.7, types: ["grass", "poison"] },
+  { name: "Ponyta", height: 1, types: ["speed", "fire", "agility"] },
+  { name: "Butterfree", height: 1.1, types: ["psychic", "poison"] },
+];
