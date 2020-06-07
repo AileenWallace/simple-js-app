@@ -1,18 +1,18 @@
 var repository = [
-  { 
-    name: "Bulbasaur", 
-    height: 0.7, 
-    types: ["grass", "poison"] 
+  {
+    name: "Bulbasaur",
+    height: 0.7,
+    types: ["grass", "poison"],
   },
-  { 
-    name: "Ponyta", 
-    height: 1, 
-    types: ["speed", "fire", "agility"] 
+  {
+    name: "Ponyta",
+    height: 1,
+    types: ["speed", "fire", "agility"],
   },
-  { 
-    name: "Butterfree", 
-    height: 1.1, 
-    types: ["psychic", "poison"] 
+  {
+    name: "Butterfree",
+    height: 1.1,
+    types: ["psychic", "poison"],
   },
 ];
 
@@ -24,19 +24,19 @@ for (var item = 0; item < repository.length; item++) {
     size = "It's small pokemon";
   }
 
-
-document.write(
-  '<div class="box">' +
-    repository[item].name +
-    "(height: " +
-    repository[item].height +
-    "m" +
-    ")" +
-    "<br>" +
-    size +
-    result +
-    "<br>" +
-    repository[item].types +
-    "<br>" +
-    "</div>"
-);
+  document.write(
+    '<div class="box">' +
+      repository[item].name +
+      "(height: " +
+      repository[item].height +
+      "m" +
+      ")" +
+      "<br>" +
+      size +
+      result +
+      "<br>" +
+      repository[item].types +
+      "<br>" +
+      "</div>"
+  );
+}
