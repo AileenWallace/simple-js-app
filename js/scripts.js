@@ -16,26 +16,45 @@ var repository = [
   },
 ];
 
-for (var item = 0; item < repository.length; item++) {
+repository.forEach(function (item) {
   var size;
-  if (repository[item].height > 0.8) {
+  if (item.height > 0.8) {
     size = "Wow, that is big!";
   } else {
-    size = "It's a small pokemon";
+    size = "It is a small pokemon.";
   }
+
+  var result;
+  item.types.forEach(function (typeItem) {
+    if (typeItem == "grass") {
+      result = '<span style="color:green;"> ';
+    } else if (typeItem == "poison") {
+      result = '<span style="color: #90EE90;"> ';
+    } else if (typeItem == "speed") {
+      result = '<span style="color:purple;"> ';
+    } else if (typeItem == "fire") {
+      result = '<span style="color: #B22222;"> ';
+    } else if (typeItem == "agility") {
+      result = '<span style="color: #FFD700;"> ';
+    } else if (typeItem == "psychic") {
+      result = '<span style="color: #4B0082;"> ';
+    }
+  });
 
   document.write(
     '<div class="box">' +
-      repository[item].name +
+      item.name +
       "(height: " +
-      repository[item].height +
+      item.height +
       "m" +
       ")" +
       "<br>" +
       size +
+      result +
       "<br>" +
-      repository[item].types +
+      item.types +
       "<br>" +
       "</div>"
   );
-}
+});
+console.log(repository);
