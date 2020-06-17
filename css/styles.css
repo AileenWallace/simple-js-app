@@ -10,3 +10,7 @@
       border: 5px solid gray;
       margin: 10px;
   }
+
+  .pokemon-list {
+      list-style-type: none;
+  }
