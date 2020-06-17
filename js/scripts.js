@@ -1,20 +1,8 @@
 var pokemonRepository = (function () {
   var pokemonList = [
-    {
-      name: "Bulbasaur",
-      height: 0.7,
-      types: ["grass", "poison"],
-    },
-    {
-      name: "Ponyta",
-      height: 1,
-      types: ["fire", "agility", "speed"],
-    },
-    {
-      name: "Butterfree",
-      height: 1.1,
-      types: ["poison", "psychic"],
-    },
+    { name: "Bulbasaur", height: 0.7, types: ["grass", "poison"] },
+    { name: "Ponyta", height: 1, types: ["fire", "agility", "speed"] },
+    { name: "Butterfree", height: 1.1, types: ["poison", "psychic"] },
   ];
 
   function add(pokemon) {
@@ -32,9 +20,25 @@ var pokemonRepository = (function () {
   function getAll() {
     return pokemonList;
   }
+  function addListItem(pokemon) {
+    var pokemonList = document.querySelector(".pokemon-list");
+    var $listItem = document.createElement("li");
+    var button = document.createElement("button");
+    button.innerText = pokemon.name;
+    button.classList.add("my-class");
+    $listItem.appendChild(button);
+    pokemonList.appendChild($listItem);
+    button.addEventListener("click", function (event) {
+      showDetails(pokemon);
+    });
+  }
+  function showDetails(pokemon) {
+    console.log(pokemon);
+  }
   return {
     add: add,
     getAll: getAll,
+    addListItem: addListItem,
   };
 })();
 
@@ -71,21 +75,5 @@ pokemonRepository.getAll().forEach(function (pokemon) {
       fontColor = '<span style="color: blue;"> ';
     }
   });
-
-  document.write(
-    '<div class="box">' +
-      pokemon.name +
-      "(height: " +
-      pokemon.height +
-      "m" +
-      ")" +
-      "<br>" +
-      size +
-      fontColor +
-      "<br>" +
-      pokemon.types +
-      "<br>" +
-      "</div>"
-  );
-  console.log(pokemonRepository);
+  pokemonRepository.addListItem(pokemon);
 });
