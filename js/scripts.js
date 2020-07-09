@@ -1,4 +1,4 @@
-var pokemonRepository = (function () {
+var pokemonRepository = function () {
   var pokemonList = [];
   var apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
 
@@ -9,39 +9,34 @@ var pokemonRepository = (function () {
       "detailsUrl" in pokemon
     ) {
       pokemonList.push(pokemon);
-    } else {
-      console.log("This is not a pokemon");
+    } /*else {
+      console.log("This is not a pokemon"); */
     }
   }
-
   function getAll() {
     return pokemonList;
   }
-  function addListItem(pokemon) {
-    var pokemonList = document.querySelector(".pokemon-list");
-    var $listItem = document.createElement("div");
-    var button = document.createElement("button");
+  function addListItem(pokemon = {}) {
+    var $pokemonList = $(".pokemon-list");
+    var $listItem = $("div");
+    /* var button = document.createElement("button");
     button.innerText = pokemon.name;
-    button.classList.add("my-class");
-    $listItem.appendChild(button);
-    pokemonList.appendChild($listItem);
-    button.addEventListener("click", function (event) {
+    button.classList.add("my-class"); */
+    var $button = $('<button class="my-class">' + pokemon.name + '</button>');
+    $listItem.append($button);
+    $pokemonList.append($listItem);
+    $button.on("click", function (event) {
       showDetails(pokemon);
     });
   }
-
   function showDetails(item) {
-    pokemonRepository.loadDetails(item).then(function () {
+    pokemonRepository.loadDetails(item).then(function() {
       console.log(item);
       showModal(item);
     });
   }
-
   function loadList() {
-    return fetch(apiUrl)
-      .then(function (response) {
-        return response.json();
-      })
+    return $.ajax(apiUrl)
       .then(function (json) {
         json.results.forEach(function (item) {
           var pokemon = {
@@ -52,121 +47,99 @@ var pokemonRepository = (function () {
           console.log(pokemon);
         });
       })
-      .catch(function (e) {
+      .catch(function(e) {
         console.error(e);
       });
   }
 
   function loadDetails(item) {
     var url = item.detailsUrl;
-    return fetch(url)
-      .then(function (response) {
-        return response.json();
-      })
+    return $.ajax(url)
       .then(function (details) {
         item.imageUrl = details.sprites.front_default;
         item.imageUrlBack = details.sprites.back_default;
         item.height = details.height;
-        item.types = [];
-        for (var i = 0; i < details.types.length; i++) {
-          item.types.push(details.types[i].type.name);
-        }
-        if (item.types.includes("grass")) {
-          document.getElementById("modal-container").style.background =
-            "lightgreen";
-        } else if (item.types.includes("poison")) {
-          document.getElementById("modal-container").style.background =
-            "purple";
-        } else if (item.types.includes("speed")) {
-          document.getElementById("modal-container").style.background =
-            "darkblue";
-        } else if (item.types.includes("fire")) {
-          document.getElementById("modal-container").style.background = "red";
-        } else if (item.types.includes("agility)")) {
-          document.getElementById("modal-container").style.background =
-            "orange";
-        } else if (item.types.includes("psychic)")) {
-          document.getElementById("modal-container").style.background = "brown";
-        } else if (item.types.includes("electric")) {
-          document.getElementById("modal-container").style.background =
-            "yellow";
-        } else if (item.types.includes("water")) {
-          document.getElementById("modal-container").style.background = "blue";
-        }
-
-        item.abilities = [];
-        for (var i = 0; i < details.abilities.length; i++) {
-          item.abilities.push(details.abilities[i].ability.name);
-        }
-
-        item.weight = details.weight;
+        item.types = Object.keys(details.types);
       })
-
       .catch(function (e) {
         console.error(e);
       });
+  } /*
+  for (var i = 0; i < details.types.length; i++) {
+    item.types.push(details.types[i].type.name);
+  }
+  if (item.types.includes("grass")) {
+    document.getElementById("modal-container").style.background = "lightgreen";
+  } else if (item.types.includes("poison")) {
+    document.getElementById("modal-container").style.background = "purple";
+  } else if (item.types.includes("speed")) {
+    document.getElementById("modal-container").style.background = "darkblue";
+  } else if (item.types.includes("fire")) {
+    document.getElementById("modal-container").style.background = "red";
+  } else if (item.types.includes("agility)")) {
+    document.getElementById("modal-container").style.background = "orange";
+  } else if (item.types.includes("psychic)")) {
+    document.getElementById("modal-container").style.background = "brown";
+  } else if (item.types.includes("electric")) {
+    document.getElementById("modal-container").style.background = "yellow";
+  } else if (item.types.includes("water")) {
+    document.getElementById("modal-container").style.background = "blue";
   }
 
+  item.abilities = [];
+  for (var i = 0; i < details.abilities.length; i++) {
+    item.abilities.push(details.abilities[i].ability.name);
+  }
+
+  item.weight = details.weight;
+}; */
+
   function showModal(item) {
-    var $modalContainer = document.querySelector("#modal-container");
+    var $modalContainer = $("#modal-container");
     // clear all existing modal content
-    $modalContainer.innerHTML = "";
+    $modalContainer.empty();
 
-    var modal = document.createElement("div");
-    modal.classList.add("modal");
-
+    var modal = $('<div class="modal"></div>');
     //add the new modal content
-    var closeButtonElement = document.createElement("button");
-    closeButtonElement.classList.add("modal-close");
-    closeButtonElement.innerText = "Close";
-    closeButtonElement.addEventListener("click", hideModal);
+    var closeButtonElement = $('<button class="modal-close"> Close </button>');
+    closeButtonElement.on("click", hideModal);
 
-    var nameElement = document.createElement("h1");
-    nameElement.innerText = item.name;
+    var nameElement = $("<h1>" + item.name + "</h1>");
 
-    var imageElement = document.createElement("img");
-    imageElement.classList.add("modal-img");
-    imageElement.setAttribute("src", item.imageUrl);
+    var imageElement = $('<img class="modal-img">');
+    imageElement.attr("src", item.imageUrl);
 
-    var imageElementBack = document.createElement("img");
-    imageElementBack.classList.add("modal-img");
-    imageElementBack.setAttribute("src", item.imageUrlBack);
+    var imageElementBack = $('<img class="modal-img">');
+    imageElementBack.attr("src", item.imageUrlBack);
 
-    var heightElement = document.createElement("p");
-    heightElement.innerText = "height : " + item.height;
+    var heightElement = $("<p>" + "height : " + item.height + "</p>");
 
-    var weightElement = document.createElement("p");
-    weightElement.innerText = "weight : " + item.weight;
+    var weightElement = $("<p>" + "weight : " + item.weight + "</p>");
 
-    var typesElement = document.createElement("p");
-    typesElement.innerText = "types : " + item.types;
+    var typesElement = $("<p>" + "types : " + item.types + "</p>");
 
-    var abilitiesElement = document.createElement("p");
-    abilitiesElement.innerText = "abilities : " + item.abilities;
+    var abilitiesElement = $("<p>" + "abilities : " + item.abilities + "</p>");
 
-    modal.appendChild(closeButtonElement);
-    modal.appendChild(nameElement);
-    modal.appendChild(imageElement);
-    modal.appendChild(imageElementBack);
-    modal.appendChild(heightElement);
-    modal.appendChild(weightElement);
-    modal.appendChild(typesElement);
-    modal.appendChild(abilitiesElement);
-    $modalContainer.appendChild(modal);
+    modal.append(closeButtonElement);
+    modal.append(nameElement);
+    modal.append(imageElement);
+    modal.append(imageElementBack);
+    modal.append(heightElement);
+    modal.append(weightElement);
+    modal.append(typesElement);
+    modal.append(abilitiesElement);
+    $modalContainer.append(modal);
     $modalContainer.classList.add("is-visible");
   }
 
   function hideModal() {
-    var $modalContainer = document.querySelector("#modal-container");
-    $modalContainer.classList.remove("is-visible");
+    var $modalContainer = $("#modal-container");
+    $modalContainer.removeClass("is-visible");  
   }
 
-  window.addEventListener("keydown", (e) => {
-    var $modalContainer = document.querySelector("#modal-container");
-    if (
-      e.key === "Escape" &&
-      $modalContainer.classList.contains("is-visible")
-    ) {
+  jQuery(window).on("keydown", (e) => {
+    var $modalContainer = $("#modal-container");
+    if (e.key === "Escape" && $modalContainer.hasClass("is-visible")) {
       hideModal();
     }
   });
@@ -188,7 +161,6 @@ var pokemonRepository = (function () {
     hideModal: hideModal,
   };
 })();
-
 pokemonRepository.loadList().then(function () {
   pokemonRepository.getAll().forEach(function (pokemon) {
     pokemonRepository.addListItem(pokemon);
