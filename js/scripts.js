@@ -12,13 +12,13 @@ var pokemonRepository = function () {
     } /*else {
       console.log("This is not a pokemon"); */
     }
-  }
+  } 
   function getAll() {
     return pokemonList;
   }
   function addListItem(pokemon = {}) {
     var $pokemonList = $(".pokemon-list");
-    var $listItem = $("div");
+    var $listItem = $("<div>");
     /* var button = document.createElement("button");
     button.innerText = pokemon.name;
     button.classList.add("my-class"); */
@@ -38,7 +38,7 @@ var pokemonRepository = function () {
   function loadList() {
     return $.ajax(apiUrl)
       .then(function (json) {
-        json.results.forEach(function (item) {
+        json.results.forEach(function(item) {
           var pokemon = {
             name: item.name,
             detailsUrl: item.url,
@@ -55,13 +55,14 @@ var pokemonRepository = function () {
   function loadDetails(item) {
     var url = item.detailsUrl;
     return $.ajax(url)
-      .then(function (details) {
+      .then(function(details) {
         item.imageUrl = details.sprites.front_default;
         item.imageUrlBack = details.sprites.back_default;
         item.height = details.height;
+        item.weight = details.weight;
         item.types = Object.keys(details.types);
       })
-      .catch(function (e) {
+      .catch(function(e) {
         console.error(e);
       });
   } /*
@@ -158,9 +159,10 @@ var pokemonRepository = function () {
     loadList: loadList,
     loadDetails: loadDetails,
     showModal: showModal,
-    hideModal: hideModal,
+    hideModal: hideModal
   };
 })();
+
 pokemonRepository.loadList().then(function () {
   pokemonRepository.getAll().forEach(function (pokemon) {
     pokemonRepository.addListItem(pokemon);
