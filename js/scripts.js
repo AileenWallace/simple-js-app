@@ -45,7 +45,7 @@ var pokemonRepository = (function () {
       $image.attr("src", pokemon.imageUrlFront);
       var $cardBody = $('<div class="card-body"></div>');
       var $cardTitle = $('<h4 class="card-title" >') + pokemon.name + '</h4>';
-      var $seeProfile = $('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="example-modal">See Profile </button>');
+      var $seeProfile = $('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="example-modal"> <em>SEE PROFILE</em> </button>');
       
       $row.append($card);
       $card.append($image);
@@ -57,7 +57,7 @@ var pokemonRepository = (function () {
         showDetails(pokemon);
       });
     });
-  } /* = {}) {
+  } 
     var $pokemonList = $(".pokemon-list");
     var $listItem = $("<li>");
     //var button = document.createElement("button");
@@ -73,13 +73,13 @@ var pokemonRepository = (function () {
     $button.on("click", function (event) {
       showDetails(pokemon);
     });
-  } */
-  function showDetails(item) {
+  } 
+  /* function showDetails(item) {
     pokemonRepository.loadDetails(item).then(function () {
       console.log(item);
       showModal(item);
-    });
-  }
+    }); 
+  } 
   function loadList() {
     return $.ajax(apiUrl)
       .then(function (json) {
@@ -95,7 +95,7 @@ var pokemonRepository = (function () {
       .catch(function (e) {
         console.error(e);
       });
-  }
+  } 
 
   function loadDetails(item) {
     var url = item.detailsUrl;
@@ -106,7 +106,7 @@ var pokemonRepository = (function () {
         item.imageUrl = details.sprites.back_default;
         item.height = details.height;
         item.weight = details.weight;
-        item.types = []; /* Object.keys(details.types);
+        item.types = [];  Object.keys(details.types);
       })
       .catch(function (e) {
         console.error(e);
@@ -149,7 +149,7 @@ var pokemonRepository = (function () {
       }
 
       item.weight = details.weight;
-    }) 
+    
 
   function showModal(item) {
     var modalBody = $(".modal-body");
@@ -157,18 +157,18 @@ var pokemonRepository = (function () {
     var modalHeader = $(".modal-header");
     modal.Title.empty();
     modalBody.empty();
-    //var $modalContainer = $("#modal-container");
+    var $modalContainer = $("#modal-container");
     //clear existing content of the model
-    //$modalContainer.empty();
+    $modalContainer.empty();
     //creating div element in DOM
     //adding class to div DOM element
-    //var modal = $('<div class="modal"></div>');
+    var modal = $('<div class="modal"></div>');
     //creating closing button in modal content
-    /* var closeButtonElement = $(
+     var closeButtonElement = $(
       '<button class="modal-close" "btn btn-outline-light" type="button" >Close</button>'
     ); 
     // adding event listener to close modal when clicked on button
-    closeButtonElement.on("click", hideModal); */
+    closeButtonElement.on("click", hideModal); 
     //creating element for name in modal content
     var nameElement = $("<h1>" + item.name + "</h1>");
     // creating img in modal content
@@ -192,12 +192,12 @@ var pokemonRepository = (function () {
     modal.append(weightElement);
     modal.append(typesElement);
     modal.append(abilitiesElement);
-    /* $modalContainer.append(modal);
+     $modalContainer.append(modal);
     //adds class to show the modal
-    $modalContainer.addClass("is-visible"); */
+    $modalContainer.addClass("is-visible"); 
   }
 
-  /*function hideModal() {
+  function hideModal() {
     var $modalContainer = $("#modal-container");
     $modalContainer.removeClass("is-visible");
   }
@@ -213,7 +213,7 @@ var pokemonRepository = (function () {
     if (target === $modalContainer) {
       hideModal();
     }
-  }); */
+  }); 
 
   return {
     add: add,
