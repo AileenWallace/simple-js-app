@@ -4,137 +4,65 @@ body {
   font-family: "Helvetica Neue Thin", sans-serif;
 }
 
+p {
+  padding: 40 px;
+  text-align: left;
+}
+
 h1 {
   font-family: "Didot", serif;
+  text-align: center;
+  padding: 40px;
+}
+
+h4 {
+  color: white;
+  font-family: "Didot", serif;
+  padding: 20px;
 }
 
 .my-class {
-  background-color: grey;
+  background-color: #14123d;
   border: none;
   color: white;
   padding: 16px 32px;
   text-align: center;
-  text-decoration: none;
+  text-decoration: bold;
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
   -webkit-transition-duration: 0.4s;
+  /* Safari */
   transition-duration: 0.4s;
   cursor: pointer;
   background-color: white;
   color: black;
-  border: 2px solid black;
+  border: 2px solid #4caf50;
 }
 
 .my-class:hover {
-  background-color: rgb(49, 56, 145);
+  background-color: #14123d;
   color: white;
 }
 
-#modal-container {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-}
-
-.modal {
-  margin: auto;
-  display: inline-block;
-  box-sizing: border-box;
-  background: #fff;
-  padding: 15px;
-  width: 100%;
-  max-width: 75%;
-  text-align: left;
-  border-radius: 10px;
-}
-
-.modal h1 {
-  margin-top: 10px;
-}
-
-.modal p {
-  text-align: center;
-  margin-bottom: 0;
-}
-
-#modal-container.is-visible {
-  display: block;
-  position: fixed;
-  padding: 10px;
-  box-sizing: border-box;
-  top: 50;
-  left: 50;
-  width: 60%;
-  height: 60%;
-  background: rgba(0, 0, 0, 0.5);
-  /* to show it above other content */
-  z-index: 999;
-  /* to allow scrolling if the screen is not large enough */
-  overflow: auto;
-  /*this is used to center the modal */
-  text-align: center;
-}
-
-.modal-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-  height: auto;
-}
-
-.modal-close {
-  -moz-box-shadow: inset 0px 1px 0px 0px white;
-  -webkit-box-shadow: inset 0px 1px 0px 0px white;
-  box-shadow: inset 0px 1px 0px 0px white;
-  background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #6b56e3), color-stop(1, #403096));
-  background: -moz-linear-gradient(top, white 5%, white 100%);
-  background: -webkit-linear-gradient(top, white 5%, white 100%);
-  background: -o-linear-gradient(top, white 5%, white 100%);
-  background: -ms-linear-gradient(top, white 5%, white 100%);
-  background: linear-gradient(to bottom, white 5%, white 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='white', endColorstr='white', GradientType=0);
-  background-color: white;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  border: 0.25px solid black;
-  display: block;
-  cursor: pointer;
-  color: black;
-  font-family: "Helvetica", sans-serif;
-  font-size: 12px;
-  font-weight: light;
-  padding: 2px 2px;
-  text-decoration: none;
-  text-shadow: 0px 0px 0px black;
-  float: right;
-}
-
-.box {
-  width: 350 px;
-  padding: 20px;
-  border: 5px solid gray;
-  margin: 10px;
-}
-
-.pokemon-list {
-  list-style-type: none;
-}
-
 .card {
-  position: center;
+  padding: 30px;
+  float: center;
+  text-decoration-color: white;
+  position: relative;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: grey;
+  background-color: #14123d;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0.125);
+  border: 1px solid #ffd7bf;
   border-radius: 0.25rem;
+}
+
+.navbar {
+  color: #14123d;
+  font-family: "Didot", serif;
 }
